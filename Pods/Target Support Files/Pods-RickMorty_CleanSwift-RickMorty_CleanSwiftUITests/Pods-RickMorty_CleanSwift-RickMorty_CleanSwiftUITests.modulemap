@@ -1,0 +1,6 @@
+framework module Pods_RickMorty_CleanSwift_RickMorty_CleanSwiftUITests {
+  umbrella header "Pods-RickMorty_CleanSwift-RickMorty_CleanSwiftUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

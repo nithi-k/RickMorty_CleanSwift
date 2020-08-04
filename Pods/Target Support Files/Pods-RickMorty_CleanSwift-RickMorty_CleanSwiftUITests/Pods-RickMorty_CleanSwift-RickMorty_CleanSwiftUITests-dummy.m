@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_RickMorty_CleanSwift_RickMorty_CleanSwiftUITests : NSObject
+@end
+@implementation PodsDummy_Pods_RickMorty_CleanSwift_RickMorty_CleanSwiftUITests
+@end
