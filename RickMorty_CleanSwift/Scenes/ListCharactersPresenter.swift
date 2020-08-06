@@ -14,7 +14,7 @@ import UIKit
 
 protocol ListCharactersPresentationLogic
 {
-  func presentSomething(response: ListCharacters.Something.Response)
+  func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response)
 }
 
 class ListCharactersPresenter: ListCharactersPresentationLogic
@@ -23,9 +23,20 @@ class ListCharactersPresenter: ListCharactersPresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: ListCharacters.Something.Response)
+  func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response)
   {
-    let viewModel = ListCharacters.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+    var displayedCharacters: [ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter] = []
+    
+    for character in response.characters{
+        
+        guard let imageURL = character.imageURL else{
+            return
+        }
+        let displayCharacter = ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter(imageURL: imageURL)
+        displayedCharacters.append(displayCharacter)
+    }
+    
+    let viewModel = ListCharacters.FetchCharacters.ViewModel(displayedCharacters: displayedCharacters)
+    viewController?.displayFetchedCharacters(viewModel: viewModel)
   }
 }

@@ -14,11 +14,13 @@ import UIKit
 
 protocol ListCharactersDisplayLogic: class
 {
-  func displaySomething(viewModel: ListCharacters.Something.ViewModel)
+  func displayFetchedCharacters(viewModel: ListCharacters.FetchCharacters.ViewModel)
 }
 
 class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
 {
+   
+    
   var interactor: ListCharactersBusinessLogic?
   var router: (NSObjectProtocol & ListCharactersRoutingLogic & ListCharactersDataPassing)?
 
@@ -71,6 +73,29 @@ class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
     super.viewDidLoad()
     removeSearchbarBorder()
   }
+    override func viewWillAppear(_ animated: Bool)
+     {
+       super.viewWillAppear(animated)
+       fetchCharacters()
+     }
+    
+    @IBOutlet var collectionView: UICollectionView!
+    
+  // MARK: - Fetch orders
+    
+    var displayCharacters: [ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter] = []
+//    var displayedOrders: [ListCharactersModels.FetchOrders.ViewModel.DisplayedOrder] = []
+    func fetchCharacters(){
+        let request = ListCharacters.FetchCharacters.Request()
+        interactor?.fetchCharacters(request: request)
+        
+        
+    }
+    func displayFetchedCharacters(viewModel: ListCharacters.FetchCharacters.ViewModel) {
+        displayCharacters = viewModel.displayedCharacters
+        self.collectionView.reloadData()
+        
+    }
     
   // MARK: Searching method
     @IBOutlet weak var characterSearchBar: UISearchBar!
@@ -84,14 +109,22 @@ class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
     textFieldInsideSearchBar?.leftViewMode = UITextField.ViewMode.never
     
   }
-    func doSomething(){
 
-        //    let request = ListCharacters.Something.Request()
-        //    interactor?.doSomething(request: request)
+}
+extension ListCharactersViewController:UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return displayCharacters.count
     }
-  
-  func displaySomething(viewModel: ListCharacters.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+        let item = displayCharacters[indexPath.row]
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CharacterCell
+        cell.updateUI(imageURL: item.imageURL)
+        return cell
+    }
+    
+    
 }

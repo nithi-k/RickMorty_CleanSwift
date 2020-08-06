@@ -17,4 +17,7 @@ class ListCharactersWorker
   func doSomeWork()
   {
   }
+    func fetchCharacters(completionHandler: @escaping ([Character]) -> Void){
+        
+    }
 }

@@ -8,7 +8,9 @@ target 'RickMorty_CleanSwift' do
   pod 'RxAlamofire'
   pod 'Alamofire'
   pod 'AlamofireObjectMapper'
-
+  pod 'AlamofireImage'
+  pod 'SwiftyRSA'
+  pod 'CryptoSwift'
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 

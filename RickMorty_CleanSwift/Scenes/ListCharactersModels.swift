@@ -16,16 +16,22 @@ enum ListCharacters
 {
   // MARK: Use cases
   
-  enum Something
+  enum FetchCharacters
   {
-    struct Request
+    struct Request:Encodable
     {
     }
     struct Response
     {
+        var characters:[Character]
     }
     struct ViewModel
     {
+        struct DisplayedCharacter {
+            
+            var imageURL:String
+        }
+        var displayedCharacters: [DisplayedCharacter]
     }
   }
 }

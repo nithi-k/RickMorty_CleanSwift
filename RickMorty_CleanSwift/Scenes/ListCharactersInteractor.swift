@@ -14,28 +14,35 @@ import UIKit
 
 protocol ListCharactersBusinessLogic
 {
-  func doSomething(request: ListCharacters.Something.Request)
+  func fetchCharacters(request: ListCharacters.FetchCharacters.Request)
 }
 
 protocol ListCharactersDataStore
 {
   //var name: String { get set }
+    var characters:[Character]? { get }
 }
 
 class ListCharactersInteractor: ListCharactersBusinessLogic, ListCharactersDataStore
 {
   var presenter: ListCharactersPresentationLogic?
-  var worker: ListCharactersWorker?
-  //var name: String = ""
-  
-  // MARK: Do something
-  
-  func doSomething(request: ListCharacters.Something.Request)
-  {
-    worker = ListCharactersWorker()
-    worker?.doSomeWork()
     
-    let response = ListCharacters.Something.Response()
-    presenter?.presentSomething(response: response)
+  var charactersWorker: CharacterWorkers = CharacterWorkers(charactersService: CharacterService())
+  var characters: [Character]?
+
+  // MARK: Fetch characters
+  
+  func fetchCharacters(request: ListCharacters.FetchCharacters.Request) {
+    charactersWorker.fetchCharacters(request: request, completionHandler: { (characters, error) in
+        
+        if characters != nil {
+            
+            self.characters = characters!
+            let reponse = ListCharacters.FetchCharacters.Response(characters: characters!)
+            self.presenter?.presentFetchedCharacters(response: reponse)
+        }
+        
+    })
+    
   }
 }
