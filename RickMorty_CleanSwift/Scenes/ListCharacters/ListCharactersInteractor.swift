@@ -14,22 +14,33 @@ import UIKit
 
 protocol ListCharactersBusinessLogic
 {
-  func fetchCharacters(request: ListCharacters.FetchCharacters.Request)
+    func fetchCharacters(request: ListCharacters.FetchCharacters.Request)
+    func getCellSize() -> CGSize
 }
 
 protocol ListCharactersDataStore
 {
-  //var name: String { get set }
-    var characters:[Character]? { get }
+    var searchText: String? { get set }
+    var characters:[Character]? { get set}
+    
 }
 
 class ListCharactersInteractor: ListCharactersBusinessLogic, ListCharactersDataStore
 {
+    var searchText: String? {
+        didSet{
+            self.presenter?.presentSelectedSearchKeyWord(selectedSearch: searchText ?? "")
+        }
+    }
   var presenter: ListCharactersPresentationLogic?
     
   var charactersWorker: CharacterWorkers = CharacterWorkers(charactersService: CharacterService())
   var characters: [Character]?
-
+  // MARK: Display
+    func getCellSize() -> CGSize{
+        
+        return presenter?.characterCellSize() ?? CGSize.zero
+    }
   // MARK: Fetch characters
   
   func fetchCharacters(request: ListCharacters.FetchCharacters.Request) {

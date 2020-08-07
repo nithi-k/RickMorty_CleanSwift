@@ -15,6 +15,7 @@ import UIKit
 protocol ListCharactersDisplayLogic: class
 {
   func displayFetchedCharacters(viewModel: ListCharacters.FetchCharacters.ViewModel)
+  func displaySelectedSearchText(searchText:String)
 }
 
 class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
@@ -64,6 +65,9 @@ class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
         router.perform(selector, with: segue)
       }
     }
+    if let vc = segue.destination as? SearchCharatersViewController{
+        searchCharatersViewController = vc
+    }
   }
   
   // MARK: View lifecycle
@@ -72,11 +76,12 @@ class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
   {
     super.viewDidLoad()
     removeSearchbarBorder()
+    setupElement()
   }
     override func viewWillAppear(_ animated: Bool)
      {
        super.viewWillAppear(animated)
-       fetchCharacters()
+       fetchCharacters(searchText: nil)
      }
     
     @IBOutlet var collectionView: UICollectionView!
@@ -85,11 +90,10 @@ class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
     
     var displayCharacters: [ListCharacters.FetchCharacters.ViewModel.DisplayedCharacter] = []
 //    var displayedOrders: [ListCharactersModels.FetchOrders.ViewModel.DisplayedOrder] = []
-    func fetchCharacters(){
-        let request = ListCharacters.FetchCharacters.Request()
+    func fetchCharacters(searchText:String?){
+        let request = ListCharacters.FetchCharacters.Request(name: searchText)
         interactor?.fetchCharacters(request: request)
-        
-        
+
     }
     func displayFetchedCharacters(viewModel: ListCharacters.FetchCharacters.ViewModel) {
         displayCharacters = viewModel.displayedCharacters
@@ -99,8 +103,13 @@ class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
     
   // MARK: Searching method
     @IBOutlet weak var characterSearchBar: UISearchBar!
-
-  
+    @IBOutlet weak var searchResultContainerView: UIView!
+    var searchCharatersViewController:SearchCharatersViewController?
+    
+    
+    func setupElement(){
+       
+   }
   func removeSearchbarBorder()
   {
     characterSearchBar.backgroundImage = UIImage()
@@ -109,9 +118,21 @@ class ListCharactersViewController: UIViewController, ListCharactersDisplayLogic
     textFieldInsideSearchBar?.leftViewMode = UITextField.ViewMode.never
     
   }
+    func displaySelectedSearchText(searchText: String){
+        self.characterSearchBar.text = searchText
+        self.collectionView.reloadData()
+        self.searchResultContainerView.isHidden = true
+        self.characterSearchBar.resignFirstResponder()
+        self.fetchCharacters(searchText: searchText)
+    }
 
 }
-extension ListCharactersViewController:UICollectionViewDataSource{
+extension ListCharactersViewController:UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return interactor?.getCellSize() ?? CGSize.zero
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return displayCharacters.count
     }
@@ -125,6 +146,22 @@ extension ListCharactersViewController:UICollectionViewDataSource{
         cell.updateUI(imageURL: item.imageURL)
         return cell
     }
+}
+extension ListCharactersViewController:UISearchBarDelegate{
     
-    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        self.searchResultContainerView.isHidden = false
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.router?.routeToSearch(destinationVC: searchCharatersViewController!)
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        self.searchResultContainerView.isHidden = true
+    }
+
 }

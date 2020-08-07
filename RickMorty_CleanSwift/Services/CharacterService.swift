@@ -15,7 +15,7 @@ class CharacterService {
     
     func execute(request:[String:Any],completionHandler: @escaping ([Character]?,Error?) -> Void){
         
-        Alamofire.request(APIRouter.getAllCharacter(parameters: request), method: .get)
+        Alamofire.request(APIRouter.getAllCharacter,method: .get, parameters:request)
             .responseObject { (response: DataResponse<CharacterList>) in
                 switch response.result  {
 

@@ -20,6 +20,7 @@ enum ListCharacters
   {
     struct Request:Encodable
     {
+        var name:String?
     }
     struct Response
     {

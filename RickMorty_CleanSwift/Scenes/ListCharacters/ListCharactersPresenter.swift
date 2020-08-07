@@ -14,14 +14,35 @@ import UIKit
 
 protocol ListCharactersPresentationLogic
 {
-  func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response)
+    func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response)
+    func characterCellSize()->CGSize
+    func presentSelectedSearchKeyWord(selectedSearch:String)
 }
 
 class ListCharactersPresenter: ListCharactersPresentationLogic
 {
   weak var viewController: ListCharactersDisplayLogic?
   
-  // MARK: Do something
+   // MARK: Display
+    func characterCellSize()->CGSize {
+        
+        guard let screenSize = UIApplication.shared.windows.first?.frame.size else{
+            return CGSize.zero
+        }
+        
+        let numberOfItemPerRow:CGFloat = 3
+        let gap:CGFloat = 8
+        let sectionInsets:CGFloat = 16
+        let width = (screenSize.width - gap*(numberOfItemPerRow-1) - (sectionInsets * 2))/numberOfItemPerRow
+        let height = width
+        
+        return CGSize(width: width, height: height)
+    }
+  //MARK: SearchResult
+    func presentSelectedSearchKeyWord(selectedSearch:String){
+         viewController?.displaySelectedSearchText(searchText: selectedSearch)
+    }
+  // MARK: Fetch
   
   func presentFetchedCharacters(response: ListCharacters.FetchCharacters.Response)
   {

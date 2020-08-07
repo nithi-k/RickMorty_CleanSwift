@@ -20,11 +20,16 @@ class CharacterWorkers:CharactersServiceProtocol
         
         charactersService.execute(request: request.dictionary ?? ["":""], completionHandler: completionHandler)
     }
+    func searchCharacters(request: SearchCharaters.FetchSearch.Request, completionHandler: @escaping ([Character]?, Error?) -> Void) {
+        
+        charactersService.execute(request: request.dictionary ?? ["":""], completionHandler: completionHandler)
+    }
     
 }
 protocol CharactersServiceProtocol{
     
     func fetchCharacters(request: ListCharacters.FetchCharacters.Request, completionHandler: @escaping ([Character]?, Error?) -> Void)
+    func searchCharacters(request: SearchCharaters.FetchSearch.Request, completionHandler: @escaping ([Character]?, Error?) -> Void)
 }
 
 

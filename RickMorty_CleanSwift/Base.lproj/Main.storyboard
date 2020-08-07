@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7gp-Fk-oYD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIZ-kt-kTE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -21,7 +21,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="118"/>
+            <point key="canvasLocation" x="3809" y="26"/>
         </scene>
         <!--Character List-->
         <scene sceneID="foN-fx-TAm">
@@ -39,14 +39,17 @@
                             </label>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zQQ-ui-SyC">
                                 <rect key="frame" x="0.0" y="93" width="414" height="56"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GIZ-kt-kTE" id="Myj-1Z-N07"/>
+                                </connections>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4EZ-iK-ZUZ">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4EZ-iK-ZUZ">
                                 <rect key="frame" x="0.0" y="149" width="414" height="664"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="9" id="8ro-dE-2vV">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="8ro-dE-2vV">
                                     <size key="itemSize" width="109" height="109"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -81,16 +84,26 @@
                                     <outlet property="delegate" destination="GIZ-kt-kTE" id="SAz-yQ-vK0"/>
                                 </connections>
                             </collectionView>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byZ-O8-DjI">
+                                <rect key="frame" x="0.0" y="149" width="414" height="747"/>
+                                <connections>
+                                    <segue destination="h1b-L9-BbU" kind="embed" id="jxa-kq-nVa"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="byZ-O8-DjI" firstAttribute="trailing" secondItem="Dj5-JN-UFA" secondAttribute="trailing" id="3O0-yL-084"/>
                             <constraint firstItem="zQQ-ui-SyC" firstAttribute="top" secondItem="ilZ-kw-vBs" secondAttribute="bottom" constant="16" id="3xq-Xp-8Mj"/>
                             <constraint firstItem="zQQ-ui-SyC" firstAttribute="leading" secondItem="Dj5-JN-UFA" secondAttribute="leading" id="D38-q5-bM7"/>
                             <constraint firstItem="ilZ-kw-vBs" firstAttribute="centerX" secondItem="8tl-eB-bCR" secondAttribute="centerX" id="Mpx-uT-p7u"/>
-                            <constraint firstItem="zQQ-ui-SyC" firstAttribute="trailing" secondItem="Dj5-JN-UFA" secondAttribute="trailing" id="O4g-nP-v0b"/>
+                            <constraint firstItem="Dj5-JN-UFA" firstAttribute="trailing" secondItem="zQQ-ui-SyC" secondAttribute="trailing" id="bD4-VC-tSj"/>
+                            <constraint firstAttribute="bottom" secondItem="byZ-O8-DjI" secondAttribute="bottom" id="baS-xT-duH"/>
                             <constraint firstItem="Dj5-JN-UFA" firstAttribute="bottom" secondItem="4EZ-iK-ZUZ" secondAttribute="bottom" id="f4S-wq-JUu"/>
                             <constraint firstItem="Dj5-JN-UFA" firstAttribute="trailing" secondItem="4EZ-iK-ZUZ" secondAttribute="trailing" id="gRL-8E-M3E"/>
+                            <constraint firstItem="byZ-O8-DjI" firstAttribute="leading" secondItem="Dj5-JN-UFA" secondAttribute="leading" id="s6X-vd-yaF"/>
                             <constraint firstItem="ilZ-kw-vBs" firstAttribute="top" secondItem="Dj5-JN-UFA" secondAttribute="top" constant="16" id="tZ8-Es-XAn"/>
+                            <constraint firstItem="byZ-O8-DjI" firstAttribute="top" secondItem="zQQ-ui-SyC" secondAttribute="bottom" id="unj-aS-aug"/>
                             <constraint firstItem="4EZ-iK-ZUZ" firstAttribute="leading" secondItem="Dj5-JN-UFA" secondAttribute="leading" id="yZz-1M-M75"/>
                             <constraint firstItem="4EZ-iK-ZUZ" firstAttribute="top" secondItem="zQQ-ui-SyC" secondAttribute="bottom" id="z65-oO-xio"/>
                         </constraints>
@@ -103,28 +116,55 @@
                     <connections>
                         <outlet property="characterSearchBar" destination="zQQ-ui-SyC" id="pco-SO-ggn"/>
                         <outlet property="collectionView" destination="4EZ-iK-ZUZ" id="dk1-ly-Cjj"/>
+                        <outlet property="searchResultContainerView" destination="byZ-O8-DjI" id="5rO-pB-att"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CDM-sR-nra" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2147.826086956522" y="-24.107142857142858"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="YTo-tb-ogq">
+        <!--Search Charaters View Controller-->
+        <scene sceneID="l9D-RW-vh7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="7gp-Fk-oYD" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ltG-CU-XE5">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                <viewController storyboardIdentifier="SearchCharatersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="h1b-L9-BbU" customClass="SearchCharatersViewController" customModule="RickMorty_CleanSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JwZ-mf-Ghi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="747"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EAD-Zt-0lz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="747"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="ptg-2z-n4u">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ptg-2z-n4u" id="pOV-DB-jet">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="h1b-L9-BbU" id="qUy-Q3-W50"/>
+                                    <outlet property="delegate" destination="h1b-L9-BbU" id="kQy-v8-cWY"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EAD-Zt-0lz" firstAttribute="top" secondItem="JwZ-mf-Ghi" secondAttribute="top" id="C6W-bv-kZl"/>
+                            <constraint firstAttribute="bottom" secondItem="EAD-Zt-0lz" secondAttribute="bottom" id="erJ-aG-sJd"/>
+                            <constraint firstAttribute="trailing" secondItem="EAD-Zt-0lz" secondAttribute="trailing" id="i6b-AS-ezA"/>
+                            <constraint firstItem="EAD-Zt-0lz" firstAttribute="leading" secondItem="JwZ-mf-Ghi" secondAttribute="leading" id="xhf-dy-Hyd"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <segue destination="GIZ-kt-kTE" kind="relationship" relationship="rootViewController" id="7Nz-d4-QHS"/>
+                        <outlet property="tableView" destination="EAD-Zt-0lz" id="xih-ZD-9zA"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="di0-If-aZA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tge-yc-WwF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1237.68115942029" y="-24.107142857142858"/>
+            <point key="canvasLocation" x="2991" y="-24"/>
         </scene>
     </scenes>
 </document>

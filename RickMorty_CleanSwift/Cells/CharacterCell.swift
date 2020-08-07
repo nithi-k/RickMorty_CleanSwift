@@ -18,6 +18,7 @@ class CharacterCell: UICollectionViewCell {
         guard let imageURL = URL(string: imageURL) else{
             return
         }
+        characterImage.image = nil
         characterImage.af_cancelImageRequest()
         characterImage.af_setImage(withURL: imageURL)
     }

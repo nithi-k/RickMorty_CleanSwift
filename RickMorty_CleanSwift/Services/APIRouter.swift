@@ -15,17 +15,12 @@ enum APIRouter:URLConvertible {
         return url
     }
     
-        case getAllCharacter(parameters: Parameters)
+    case getAllCharacter
         var path: String {
             switch self {
             case .getAllCharacter:
                 return "api/character"
             }
         }
-        var parameters: Parameters {
-                  switch self {
-                  case .getAllCharacter(let parameter):
-                      return parameter
-            }
-        }
+        
 }
