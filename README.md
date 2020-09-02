@@ -1,6 +1,6 @@
 # RickyMorty CleanSwift
 
-This repository contains a detailed sample app that implements Clean Swuft architecture using libraries and frameworks like Alamofire and Mappable.
+This repository contains a detailed sample app that implements Clean Swift architecture using libraries and frameworks like Alamofire and Mappable.
 
 # CleanSwift BluePrint
 <p><img style="-webkit-user-select: none;margin: auto;cursor: zoom-in;" src="https://miro.medium.com/max/2800/0*Q2qPUtCiefnnjdVI" width="100%" height="406">
